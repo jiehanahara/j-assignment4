@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    @push('styles')
 <style>
     /* Table base */
 .custom-table {
@@ -101,14 +103,62 @@
     color: white;
 }
 
+.custom-alert {
+    background-color: #e8f3ef;
+    color: #486454;
+    border-left: 5px solid #6f9f8d;
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    animation: fadeIn 0.4s ease;
+}
+
+/* Smooth fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 </style>
-
+@endpush
 </head>
+
 <body>
     @extends("master")
 
 @section("content")
+
+<div class="container mt-4">
+
+    @if (session("success"))
+    <div class="custom-alert d-flex justify-content-between align-items-center">
+
+        <div>
+            ✅ {{ session("success") }}
+        </div>
+
+    </div>
+     <script>
+setTimeout(() => {
+    const alert = document.querySelector('.custom-alert');
+    if (alert) {
+        alert.style.opacity = '0';
+        alert.style.transition = '0.5s';
+        setTimeout(() => alert.remove(), 500);
+    }
+}, 3000);
+</script>
+    @endif
+
+   
+
+</div>
 
 <div class="container mt-5">
 
@@ -187,5 +237,28 @@
 
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        class alert {
+            constructor(message) {
+                this.message = message;
+            }
+
+            show() {
+                alert(this.message);
+            }
+        }
+        let alertElement = document.querySelector('.alert');
+        if (alertElement) {
+            let alertElement.style.transition = opacity 3s ease-out;
+            alertElement.style.opacity = 0;
+            setTimeout(() => {
+                alertElement.remove();
+            }, 3000);
+        }
+    </script>
+@endpush
+
 </body>
 </html>
