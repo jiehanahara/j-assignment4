@@ -9,10 +9,15 @@ use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $destinations = Destination::all();
-        return view( view: 'pages.indexDestinations', data: compact('destinations'));
+        $keyword = $request->input('search');
+        if ($keyword != '') {
+            $destinations = Destination::where('name', 'LIKE', "%$keyword%")->paginate(5);
+        } else {
+            $destinations = Destination::orderBy('id')->paginate(5)->withQueryString();
+        }
+        return view('pages.indexDestinations', compact('destinations'));
     }
 
     public function show($id)
@@ -21,7 +26,7 @@ class DestinationController extends Controller
         return view(view: 'pages.asiaheritage', data: compact('destination'));
     }
 
-    public function create()
+public function create()
 {
     return view('pages.createDestination');
 }
@@ -62,4 +67,3 @@ public function edit($id)
         }
     }
 }
-

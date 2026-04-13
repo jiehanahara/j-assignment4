@@ -2,13 +2,13 @@
 
     <div class="container py-4">
 
-        <!-- Top section -->
+        <!-- Top -->
         <div class="row text-center text-lg-start align-items-center">
 
             <!-- Brand -->
             <div class="col-lg-6 mb-3 mb-lg-0">
                 <h5 class="fw-bold brand-footer">C.J Travel</h5>
-                <p class="mb-0 small text-dark">
+                <p class="mb-0 small text-light">
                     Discover beautiful destinations and unforgettable experiences ✨
                 </p>
             </div>

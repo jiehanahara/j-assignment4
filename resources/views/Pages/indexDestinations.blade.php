@@ -1,264 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+@extends('master')
 
-    @push('styles')
-<style>
-    /* Table base */
-.custom-table {
-    border-collapse: separate;
-    border-spacing: 0 10px;
-}
+@section('content')
 
-/* Remove default borders */
-.custom-table th,
-.custom-table td {
-    border: none;
-}
+@if (session('success'))
+<div class="custom-alert mb-3">
+    {{ session('success') }}
+</div>
+@endif
+<script>
+    setTimeout(function () {
+        let alert = document.getElementById('successAlert');
+        if (alert) {
+            alert.classList.remove('show');
+            alert.classList.add('fade');
 
-/* Header */
-.custom-table thead th {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: #888;
-    padding-bottom: 10px;
-}
-
-/* Row = card style */
-.table-row {
-    background: white;
-    box-shadow: 0 4px 15px rgba(22, 44, 36, 0.082);
-    border-radius: 12px;
-    transition: 0.2s;
-    padding-bottom: 10px;
-
-}
-
-/* Rounded rows */
-.table-row td:first-child {
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-}
-
-.table-row td:last-child {
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-}
-
-/* Hover */
-.table-row:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-/* ID */
-.id-link {
-    text-decoration: none;
-    font-weight: 600;
-    color: #486454;
-}
-
-/* Add button */
-.btn-add {
-    background-color: #6f9f8d;
-    color: white;
-    border-radius: 50px;
-    padding: 8px 18px;
-    transition: 0.2s;
-}
-
-.btn-add:hover {
-    background-color: #5a8776;
-}
-
-/* Delete button */
-.btn-delete {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 5px 12px;
-    display: inline-block;
-}
-
-.btn-delete:hover {
-    background-color: #bb2d3b;
-}
-
-.btn-edit {
-    background-color: #e8f3ef;   /* light green background */
-    color: #486454;
-    border: 1px solid #6f9f8d;
-    border-radius: 20px;
-    padding: 5px 12px;
-    display: inline-block;
-}
-
-.btn-edit:hover {
-    background-color: #6f9f8d;
-    color: white;
-}
-
-.custom-alert {
-    background-color: #e8f3ef;
-    color: #486454;
-    border-left: 5px solid #6f9f8d;
-    padding: 12px 18px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    animation: fadeIn 0.4s ease;
-}
-
-/* Smooth fade in */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-</style>
-@endpush
-</head>
-
-<body>
-    @extends("master")
-
-@section("content")
-
-<div class="container mt-4">
-
-    @if (session("success"))
-    <div class="custom-alert d-flex justify-content-between align-items-center">
-
-        <div>
-            ✅ {{ session("success") }}
-        </div>
-
-    </div>
-     <script>
-setTimeout(() => {
-    const alert = document.querySelector('.custom-alert');
-    if (alert) {
-        alert.style.opacity = '0';
-        alert.style.transition = '0.5s';
-        setTimeout(() => alert.remove(), 500);
-    }
-}, 3000);
+            // completely remove after animation
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 3000); // 3 seconds
 </script>
-    @endif
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-   
+    <div>
+        <h2 class="fw-bold mb-0">Destinations</h2>
+        <small class="text-muted">Manage and explore places</small>
+    </div>
+
+    <!-- SEARCH -->
+    <form method="GET">
+        <div class="search-box">
+            <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
+            <button>🔍</button>
+        </div>
+    </form>
 
 </div>
 
-<div class="container mt-5">
+<a href="/destination/create" class="btn btn-add mb-3">+ Add Destination</a>
 
-    <!-- Title -->
-    <div class="mb-4">
-        <h2 class="fw-bold">Destinations</h2>
-        <p class="text-muted small">Explore and manage your travel destinations</p>
+<table class="table custom-table">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Destination</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach ($destinations as $d)
+        <tr class="table-row">
+
+            <td>
+                <a href="/asiaheritage/{{ $d->id }}" class="id-link">
+                    #{{ $d->id }}
+                </a>
+            </td>
+
+            <td>
+                <div class="fw-semibold">{{ $d->name }}</div>
+                <small class="text-muted">📍 {{ $d->location }}</small>
+            </td>
+
+            
+
+            <td class="text-success fw-semibold">
+                Rp {{ number_format($d->ticket_price) }}
+            </td>
+
+            <td class="text-end">
+                <div class="d-flex gap-2 justify-content-end">
+
+                    <a href="/destinations/{{ $d->id }}/edit" class="btn btn-edit btn-sm">
+                        Edit
+                    </a>
+
+                    <form action="/destination/{{ $d->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-delete btn-sm" onclick="return confirm('Are you sure you want to delete this destination?')">
+                            Delete
+                        </button>
+                    </form>
+
+                </div>
+            </td>
+
+        </tr>
+        @endforeach
+    </tbody>
+
+</table>
+<div class="mt-3 text-center">
+
+    {{-- Pagination buttons --}}
+    <div class="d-flex justify-content-center">
+        {{ $destinations->links('pagination::bootstrap-5') }}
     </div>
 
-    <!-- Add Button -->
-    <div class="mb-3">
-        <a href="/destination/create" class="btn btn-add">+ Add Destination</a>
-    </div>
-
-    <!-- Table -->
-    <div class="table-responsive">
-
-        <table class="table custom-table align-middle">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Destination</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach ($destinations as $d)
-                <tr class="table-row">
-
-                    <td>
-                        <a href="/asiaheritage/{{ $d->id}}" class="id-link">
-                            #{{ $d->id}}
-                        </a>
-                    </td>
-
-                    <td>
-                        <div class="fw-semibold">{{ $d->name }}</div>
-                        <div class="text-muted small">📍 {{ $d->location }}</div>
-                    </td>
-
-                    <td class="text-muted small">
-                        {{ Str::limit($d->description, 70) }}
-                    </td>
-
-                    <td class="fw-semibold text-success">
-                        Rp {{ number_format($d->ticket_price) }}
-                    </td>
-
-                    <td class="text-end">
-    <div class="d-flex gap-2 justify-content-end">
-
-        <a href="/destinations/{{ $d->id }}/edit" class="btn btn-edit btn-sm">
-            Edit
-        </a>
-
-        <form action="/destination/{{ $d->id}}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-delete btn-sm">
-                Delete
-            </button>
-        </form>
-
-    </div>
-</td>
-
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
+    {{-- Result text --}}
+    <div class="pagination-info mt-2">
+        Showing {{ $destinations->firstItem() }} 
+        to {{ $destinations->lastItem() }} 
+        of {{ $destinations->total() }} results
     </div>
 
 </div>
 @endsection
-
-@push('scripts')
-    <script>
-        class alert {
-            constructor(message) {
-                this.message = message;
-            }
-
-            show() {
-                alert(this.message);
-            }
-        }
-        let alertElement = document.querySelector('.alert');
-        if (alertElement) {
-            let alertElement.style.transition = opacity 3s ease-out;
-            alertElement.style.opacity = 0;
-            setTimeout(() => {
-                alertElement.remove();
-            }, 3000);
-        }
-    </script>
-@endpush
-
-</body>
-</html>
