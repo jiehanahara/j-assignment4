@@ -247,6 +247,103 @@
     color: #445c4a;
     opacity: 0.8;
 }
+
+
+/* TABLE */
+.user-table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.user-table th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #888;
+}
+
+.user-row {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-radius: 12px;
+}
+
+/* rounded row edges */
+.user-row td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.user-row td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* hover */
+.user-row:hover {
+    transform: translateY(-2px);
+    transition: 0.2s;
+}
+
+/* buttons */
+.user-btn-edit {
+    background-color: #e8f3ef;
+    color: #486454;
+    border: 1px solid #6f9f8d;
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+
+.user-btn-edit:hover {
+    background-color: #6f9f8d;
+    color: white;
+}
+
+.user-btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 12px;
+    border: none;
+}
+
+.user-btn-delete:hover {
+    background-color: #bb2d3b;
+}
+
+/* add button */
+.user-btn-create {
+    background-color: #6f9f8d;
+    color: white;
+    border-radius: 50px;
+    padding: 8px 18px;
+}
+
+.user-btn-create:hover {
+    background-color: #5a8776;
+}
+
+/* search */
+.user-search {
+    background: #f5f9f7;
+    border-radius: 50px;
+    padding: 5px 10px;
+    display: flex;
+}
+
+.user-search input {
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+.user-search button {
+    border: none;
+    background: #6f9f8d;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+}
+
     </style>
 
     @stack('styles')

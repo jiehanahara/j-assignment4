@@ -44,7 +44,6 @@
         <tr>
             <th>ID</th>
             <th>Destination</th>
-            <th>Description</th>
             <th>Price</th>
             <th></th>
         </tr>

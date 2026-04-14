@@ -60,3 +60,16 @@ Route::delete('/destination/{id}', [DestinationController::class, 'delete']
 
 Route::get('/destinations/{id}/edit', [DestinationController::class, 'edit']);
 Route::put('/destinations/{id}', [DestinationController::class, 'update']);
+
+Route::get('/User', function () {
+    $users = App\Models\User::all();
+    return view('pages.indexUser', compact('users'));
+});
+
+Route::get('/User/create', [App\Http\Controllers\UserController::class, 'create']);
+Route::post('/User', [App\Http\Controllers\UserController::class, 'store']);
+
+Route::get('/User/{id}/edit', [App\Http\Controllers\UserController::class, 'edit']);
+Route::put('/User/{id}', [App\Http\Controllers\UserController::class, 'update']);
+
+Route::delete('/User/{id}', [App\Http\Controllers\UserController::class, 'destroy']);
