@@ -18,7 +18,7 @@ class UserController extends Controller
         } else {
             $users = User::orderBy('id')->paginate(5)->withQueryString();
         }
-        return view('pages.indexUser', compact('user s'));
+        return view('pages.User.indexUser', compact('users'));
     }
 
     /**
