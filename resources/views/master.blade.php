@@ -16,7 +16,7 @@
 
     /* NAVBAR */
     .custom-navbar {
-        background: linear-gradient(90deg, #89ad9b, #486454);
+        background: linear-gradient(90deg, #5e7a6b, #486454);
     }
 
     .brand-text {
@@ -261,13 +261,19 @@
     color: #888;
 }
 
+/* ROW */
 .user-row {
     background: white;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     border-radius: 12px;
+    transition: 0.2s;
 }
 
-/* rounded row edges */
+.user-row:hover {
+    transform: translateY(-2px);
+}
+
+/* ROUND EDGES */
 .user-row td:first-child {
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
@@ -278,65 +284,68 @@
     border-bottom-right-radius: 12px;
 }
 
-/* hover */
-.user-row:hover {
-    transform: translateY(-2px);
-    transition: 0.2s;
+/* BUTTONS */
+.user-btn-view {
+    background: #eef5f2;
+    color: #486454;
+    border-radius: 20px;
+    padding: 4px 10px;
 }
 
-/* buttons */
+.user-btn-view:hover {
+    background: #dcebe5;
+}
+
 .user-btn-edit {
-    background-color: #e8f3ef;
-    color: #486454;
-    border: 1px solid #6f9f8d;
+    background: #6f9f8d;
+    color: white;
     border-radius: 20px;
-    padding: 5px 12px;
+    padding: 4px 10px;
 }
 
 .user-btn-edit:hover {
-    background-color: #6f9f8d;
-    color: white;
+    background: #5a8776;
 }
 
 .user-btn-delete {
-    background-color: #dc3545;
+    background: #dc3545;
     color: white;
     border-radius: 20px;
-    padding: 5px 12px;
+    padding: 4px 10px;
     border: none;
 }
 
 .user-btn-delete:hover {
-    background-color: #bb2d3b;
+    background: #bb2d3b;
 }
 
-/* add button */
+/* ADD BUTTON */
 .user-btn-create {
-    background-color: #6f9f8d;
+    background: linear-gradient(90deg, #486454, #89ad9b);
     color: white;
     border-radius: 50px;
     padding: 8px 18px;
 }
 
 .user-btn-create:hover {
-    background-color: #5a8776;
+    opacity: 0.9;
 }
 
-/* search */
-.user-search {
+/* SEARCH */
+.search-box {
+    display: flex;
     background: #f5f9f7;
     border-radius: 50px;
     padding: 5px 10px;
-    display: flex;
 }
 
-.user-search input {
+.search-box input {
     border: none;
     background: transparent;
     outline: none;
 }
 
-.user-search button {
+.search-box button {
     border: none;
     background: #6f9f8d;
     color: white;
@@ -344,17 +353,279 @@
     width: 32px;
 }
 
+/* ALERT */
+.custom-alert {
+    background-color: #e8f3ef;
+    color: #486454;
+    border-left: 5px solid #6f9f8d;
+    padding: 12px 18px;
+    border-radius: 12px;
+}
+
+.btn-cancel {
+    background-color: #a9c5bd;
+    color: #425749;
+    border-radius: 20px;
+    padding: 8px 18px;
+    border: none;
+
+}
+
+.btn-cancel:hover {
+    background-color: #628075;  
+    color: white;
+}
+
+/* Card styling */
+.user-detail-card {
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Cancel button */
+.btn-cancel {
+    background-color: #e8f3ef;
+    color: #486454;
+    border-radius: 30px;
+    padding: 6px 16px;
+    border: 1px solid #6f9f8d;
+    transition: 0.2s;
+}
+
+.btn-cancel:hover {
+    background-color: #6f9f8d;
+    color: white;
+}
+
+/* Edit button */
+.btn-edit {
+    background-color: #6f9f8d;
+    color: white;
+    border-radius: 30px;
+    padding: 6px 16px;
+    border: none;
+}
+
+.btn-edit:hover {
+    background-color: #5a8776;
+}
+
+/* ===== ATTRACTION TABLE ===== */
+.attraction-table thead th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #888;
+    border: none;
+}
+
+/* Remove default borders */
+.attraction-table th,
+.attraction-table td {
+    border: none;
+    vertical-align: middle;
+}
+
+/* Row style (card look) */
+.attraction-row {
+    background: white;
+    box-shadow: 0 4px 15px rgba(22, 44, 36, 0.08);
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+/* Rounded edges */
+.attraction-row td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+.attraction-row td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+/* Hover effect */
+.attraction-row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ===== BUTTONS ===== */
+
+/* Add */
+.attraction-btn-add {
+    background-color: #6f9f8d;
+    color: white;
+    border-radius: 50px;
+    padding: 8px 18px;
+    transition: 0.2s;
+}
+.attraction-btn-add:hover {
+    background-color: #5a8776;
+}
+
+/* Edit */
+.attraction-btn-edit {
+    background-color: #e8f3ef;
+    color: #486454;
+    border: 1px solid #6f9f8d;
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+.attraction-btn-edit:hover {
+    background-color: #6f9f8d;
+    color: white;
+}
+
+/* Delete */
+.attraction-btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border-radius: 20px;
+    padding: 5px 12px;
+    border: none;
+}
+.attraction-btn-delete:hover {
+    background-color: #bb2d3b;
+}
+
+/* View */
+.attraction-btn-view {
+    background-color: #eef2ff;
+    color: #4f46e5;
+    border-radius: 20px;
+    padding: 5px 12px;
+}
+.attraction-btn-view:hover {
+    background-color: #4f46e5;
+    color: white;
+}
+
+/* ===== TEXT ===== */
+.attraction-name {
+    font-weight: 600;
+}
+
+.attraction-desc {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* SEARCH CONTAINER */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white; /* 👈 important */
+    border: 1px solid #dcdcdc;
+    border-radius: 50px;
+    padding: 5px 10px;
+    transition: 0.2s;
+}
+
+/* INPUT */
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 6px 10px;
+    width: 200px;
+    font-size: 0.9rem;
+}
+
+/* BUTTON */
+.search-box button {
+    border: none;
+    background: #6f9f8d;
+    color: white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+/* HOVER EFFECT */
+.search-box:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Card width */
+.attraction-form-card {
+    max-width: 450px;
+    width: 100%;
+}
+
+/* Cancel button */
+.attraction-btn-cancel {
+    background-color: #e8f3ef;
+    color: #486454;
+    border: 1px solid #6f9f8d;
+    border-radius: 30px;
+    padding: 6px 16px;
+    transition: 0.2s;
+}
+
+.attraction-btn-cancel:hover {
+    background-color: #6f9f8d;
+    color: white;
+}
+
+/* Submit button */
+.attraction-btn-submit {
+    background-color: #6f9f8d;
+    color: white;
+    border-radius: 30px;
+    padding: 6px 16px;
+    border: none;
+}
+
+.attraction-btn-submit:hover {
+    background-color: #5a8776;
+}
+
+.attraction-form-card {
+    margin: auto;
+}
+
+.attraction-form-card {
+    max-width: 700px;
+    width: 100%;
+}
+
+.attraction-btn-cancel {
+    background-color: #e8f3ef;
+    color: #486454;
+    border: 1px solid #6f9f8d;
+    border-radius: 30px;
+    padding: 6px 16px;
+}
+
+.attraction-btn-cancel:hover {
+    background-color: #6f9f8d;
+    color: white;
+}
+
+.attraction-btn-submit {
+    background-color: #6f9f8d;
+    color: white;
+    border-radius: 30px;
+    padding: 6px 16px;
+    border: none;
+}
+
+.attraction-btn-submit:hover {
+    background-color: #5a8776;
+}
     </style>
 
     @stack('styles')
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-    @include('partial.navbar')
+   @include('partial.navbar')
 
-    <div class="container mt-4">
-        @yield('content')
-    </div>
+<main class="flex-grow-1">
+    @yield('content')
+</main>
+
 @include('partial.footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -85,6 +85,9 @@
                         <p>{{ $destination->working_days }}</p>
                     </div>
                 </div>
+                <div>
+                    <a href="/destination" class="btn btn-cancel">Back to Destinations</a>
+                </div>
 
             </div>
 

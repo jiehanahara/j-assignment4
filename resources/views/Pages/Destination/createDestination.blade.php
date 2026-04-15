@@ -79,10 +79,12 @@
             <label>Working Days</label>
         </div>
 
-        <button type="submit" class="btn btn-submit w-100">
-            Add Destination
-        </button>
-
+       <a href="/destinations" class="btn btn-cancel">
+    Cancel
+</a>
+    <button type="submit" class="btn user-btn-create w-50">
+        + Add Destination
+    </button>
         </form>
 
     </div>

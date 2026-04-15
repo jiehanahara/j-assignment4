@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.createUser');    
+        return view('pages.User.createUser');    
     }
 
     /**
@@ -44,7 +44,8 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return view(view: 'pages.User.showUser', data: compact('user'));
     }
 
     /**
@@ -54,7 +55,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if ($user) {
-            return view('pages.editUser', compact('user'));
+            return view('pages.User.editUser', compact('user'));
         }
     }
 
@@ -85,4 +86,5 @@ class UserController extends Controller
             return redirect('/User')->with('error', 'User not found.');
         }
     }
+    
 }

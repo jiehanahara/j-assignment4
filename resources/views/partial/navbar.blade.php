@@ -3,6 +3,8 @@
 
         <a class="navbar-brand fw-bold brand-text">C.J</a>
 
+        <a href="/User" class="btn btn-add">Users</a>
+
         <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,20 +13,20 @@
             <ul class="navbar-nav ms-auto align-items-center gap-2">
 
                 <li class="nav-item">
-                    <a class="nav-link custom-link active">Home</a>
+                    <a href="/master" class="btn , nav-link custom-link active">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link custom-link">Features</a>
+                    <a href="/attractions" class="btn , nav-link custom-link">Features</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link custom-link">Pricing</a>
+                    <a href="/pricing" class="btn , nav-link custom-link">Pricing</a>
                 </li>
 
                 <li class="nav-item">
                     <!-- FIXED BUTTON -->
-                    <a class="btn btn-add btn-sm px-3">Explore</a>
+                    <a href="/destinations" class="btn btn-add btn-sm px-3">Explore</a>
                 </li>
 
             </ul>

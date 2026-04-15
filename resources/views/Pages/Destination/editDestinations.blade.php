@@ -57,7 +57,10 @@
             </div>
 
             <!-- Button -->
-            <button type="submit" class="btn btn-submit w-100">
+             <a href="/destinations" class="btn btn-cancel">
+    Cancel
+</a>
+            <button type="submit" class="btn btn-submit w-50">
                 Update Destination
             </button>
 

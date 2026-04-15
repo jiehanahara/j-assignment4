@@ -28,7 +28,7 @@
     <div class="container">
         <h1 class="display-4 fw-bold mb-3">Explore Beautiful Destinations</h1>
         <p class="lead mb-4">Find your next adventure with C.J Travel ✈️</p>
-   <a href="#" class="btn btn-warning btn-lg fw-semibold px-4 mt-3">
+   <a href="/destination" class="btn btn-warning btn-lg fw-semibold px-4 mt-3">
     Get Started
 </a>
     </div>
