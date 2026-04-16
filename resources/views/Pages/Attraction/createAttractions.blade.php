@@ -2,6 +2,16 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
 
     <div class="col-lg-7 col-md-9">
@@ -15,23 +25,53 @@
             <form action="{{ route('attractions.store') }}" method="POST">
                 @csrf
 
+                <!-- Destination -->
+                <div class="form-floating mb-3">
+                    <select class="form-select @error('destinations_id') is-invalid @enderror" 
+                            name="destinations_id" required>
+                        <option value="">Select Destination</option>
+                        @foreach($destinations as $destination)
+                            <option value="{{ $destination->id }}" 
+                                {{ old('destinations_id') == $destination->id ? 'selected' : '' }}>
+                                {{ $destination->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <label>Destination</label>
+
+                    @error('destinations_id')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <!-- Name -->
                 <div class="form-floating mb-3">
                     <input type="text" 
-                           class="form-control" 
+                           class="form-control @error('name') is-invalid @enderror"
                            name="name"
-                           placeholder="Hot Air Balloon">
+                           value="{{ old('name') }}"
+                           placeholder="Name" required>
+
                     <label>Name</label>
+
+                    @error('name')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- Description -->
                 <div class="form-floating mb-3">
                     <textarea 
-                        class="form-control" 
+                        class="form-control @error('description') is-invalid @enderror"
                         name="description"
                         style="height: 140px"
-                        placeholder="Description"></textarea>
+                        placeholder="Description">{{ old('description') }}</textarea>
+
                     <label>Description</label>
+
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <!-- BUTTONS -->

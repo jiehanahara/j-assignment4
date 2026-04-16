@@ -20,6 +20,11 @@
             <div>{{ $attraction->description }}</div>
         </div>
 
+        <div class="mb-3">
+            <small class="text-muted">Destination</small>
+            <div>{{ optional($attraction->destination)->name ?? 'No destination' }}</div>
+        </div>
+
         <!-- Buttons -->
         <div class="d-flex justify-content-between">
 

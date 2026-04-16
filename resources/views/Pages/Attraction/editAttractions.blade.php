@@ -1,6 +1,15 @@
 @extends('master')
 
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
 
@@ -16,19 +25,46 @@
                 @csrf
                 @method('PUT')
 
+                <div class="form-floating mb-3">
+                    <select class="form-select @error('destinations_id') is-invalid @enderror" name="destinations_id" required>
+                        <option value="">Select Destination</option>
+                        @foreach($destinations as $destination)
+                            <option value="{{ $destination->id }}" {{ $attraction->destinations_id == $destination->id ? 'selected' : '' }}>
+                                {{ $destination->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <label for="destinations_id" class="form-label">Destination</label>
+                    <div class="invalid-feedback">
+                        @error('destinations_id')
+                            {{ $message }}
+                        @enderror
+                    </div>
+                </div>
+
                 <!-- Name -->
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="name"
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                            value="{{ $attraction->name }}" placeholder="Name">
-                    <label>Name</label>
+                    <label for="name" class="form-label">Name</label>
+                    <div class="invalid-feedback">
+                        @error('name')
+                            {{ $message }}
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- Description -->
                 <div class="form-floating mb-3">
-                    <textarea class="form-control" name="description"
+                    <textarea class="form-control @error('description') is-invalid @enderror" name="description"
                               style="height: 140px"
                               placeholder="Description">{{ $attraction->description }}</textarea>
-                    <label>Description</label>
+                    <label for="description" class="form-label">Description</label>
+                    <div class="invalid-feedback">
+                        @error('description')
+                            {{ $message }}
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- BUTTONS -->

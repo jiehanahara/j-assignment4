@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Destination;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttractionController;  
 
 Route::get( uri: '/', action: function () {
     return view('welcome');
@@ -41,10 +43,10 @@ $destination = [
 return view( view: 'pages.destination', data: compact("destination"));
 });
 
-Route::get(
-    uri: "/destinations",
-    action: [DestinationController::class, 'index']
-);
+// Route::get(
+//     uri: "/destinations",
+//     action: [DestinationController::class, 'index']
+// );
 
 Route::get( uri: "/asiaheritage/{id}", action: [DestinationController::class, 'show']);
 
@@ -61,7 +63,7 @@ Route::put('/destinations/{id}', [DestinationController::class, 'update']);
 
 
 
-Route::prefix('destination')->name('destination.')->group(function () {
+Route::prefix('destinations')->name('destination.')->group(function () {
     Route::get('/', [DestinationController::class, 'index'])->name('index');
     Route::get('/create', [DestinationController::class, 'create'])->name('create');
     Route::post('/', [DestinationController::class, 'store'])->name('store');

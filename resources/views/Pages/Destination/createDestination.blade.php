@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+ @extends("master")
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -34,11 +33,18 @@
     box-shadow: 0 0 0 0.2rem rgba(111, 159, 142, 0.582);
 }
     </style>
-</head>
-<body>
-    @extends("master")
-
+   
 @section("content")
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
 <div class="container mt-5 d-flex justify-content-center">
 
@@ -46,12 +52,17 @@
 
         <h3 class="fw-bold mb-4 text-center">Add Destination</h3>
 
-        <form action="/destinations" method="post">
+        <form action="/destinations" method="POST">
         @csrf
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" placeholder="Asia Heritage" name="name">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Asia Heritage" name="name">
             <label>Destination Name</label>
+            @error('name')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-floating mb-3">
@@ -60,23 +71,43 @@
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" placeholder="Pekanbaru" name="location">
+            <input type="text" class="form-control @error('location') is-invalid @enderror" placeholder="Pekanbaru" name="location">
             <label>Location</label>
+            @error('location')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-floating mb-3">
-            <input type="number" class="form-control" placeholder="100000" name="ticket_price">
+            <input type="number" class="form-control @error('ticket_price') is-invalid @enderror" placeholder="100000" name="ticket_price">
             <label>Ticket Price</label>
+            @error('ticket_price')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" placeholder="08.00 - 17.00" name="working_hours">
+            <input type="text" class="form-control @error('working_hours') is-invalid @enderror" placeholder="08.00 - 17.00" name="working_hours">
             <label>Working Hours</label>
+            @error('working_hours')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="form-floating mb-4">
-            <input type="text" class="form-control" placeholder="Monday - Sunday" name="working_days">
+            <input type="text" class="form-control @error('working_days') is-invalid @enderror" placeholder="Monday - Sunday" name="working_days">
             <label>Working Days</label>
+            @error('working_days')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
        <a href="/destinations" class="btn btn-cancel">
@@ -90,7 +121,4 @@
     </div>
 
 </div>
-
 @endsection
-</body>
-</html>

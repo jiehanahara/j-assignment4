@@ -33,9 +33,17 @@ public function create()
 
 public function store(Request $request)
 {
+     $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'ticket_price' => 'required|numeric',
+            'location' => 'required',
+            'working_hours' => 'required',
+            'working_days' => 'required',
+        ]);
     Destination::create($request->all());
 
-    return redirect('/destinations')->with('success', 'Destination created successfully.');
+    return redirect()->route('destination.index')->with('success', 'Destination created successfully.');
 }
 
 public function delete($id)
@@ -43,9 +51,9 @@ public function delete($id)
     $destination = Destination::find($id);
     if ($destination) {
         $destination->delete();
-        return redirect('/destinations')->with('success', 'Destination deleted successfully.');
+        return redirect()->route('destination.index')->with('success', 'Destination deleted successfully.');
     } else {
-        return redirect('/destinations')->with('error', 'Destination not found.');
+        return redirect()->route('destination.index')->with('error', 'Destination not found.');
     }
 }
 
@@ -58,12 +66,20 @@ public function edit($id)
 }
     public function update(Request $request, $id)
     {
+            $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+            'ticket_price' => 'required|numeric',
+            'location' => 'required',
+            'working_hours' => 'required',
+            'working_days' => 'required',
+        ]);
         $destination = Destination::find($id);
         if ($destination) {
             $destination->update($request->all());
-            return redirect('/destinations')->with('success', 'Destination updated successfully.');
+            return redirect()->route('destination.index')->with('success', 'Destination updated successfully.');
         } else {
-            return redirect('/destinations')->with('error', 'Destination not found.');
+            return redirect()->route('destination.index')->with('error', 'Destination not found.');
         }
     }
 }

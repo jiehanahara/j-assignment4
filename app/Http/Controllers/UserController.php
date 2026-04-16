@@ -34,6 +34,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+         $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+        ]);
         User::create($request->all());
         return redirect('/User')->with('success', 'User created successfully.');
 
@@ -64,12 +69,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'password' => 'required|min:8',
+        ]);
         $user = User::find($id);
         if ($user) {
-            $user->update($request->all());
-            return redirect('/User')->with('success', 'User updated successfully.');
+            $user->update($validated);
+            return redirect()->route('users.index')->with('success', 'User updated successfully.');
         } else {
-            return redirect('/User')->with('error', 'User not found.');
+            return redirect()->route('users.index')->with('error', 'User not found.');
         }
     }
 

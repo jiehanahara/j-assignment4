@@ -614,6 +614,39 @@
 .attraction-btn-submit:hover {
     background-color: #5a8776;
 }
+
+/* SEARCH BAR */
+.attraction-search {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 30px;
+    padding: 6px 14px;
+    width: 240px;
+    transition: 0.2s;
+}
+
+/* ICON */
+.attraction-search .search-icon {
+    font-size: 14px;
+    margin-right: 8px;
+    color: #6f9f8d;
+}
+
+/* INPUT */
+.attraction-search input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* HOVER */
+.attraction-search:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
     </style>
 
     @stack('styles')

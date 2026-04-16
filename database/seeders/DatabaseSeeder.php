@@ -31,8 +31,6 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('12345678'),
             ]);
         }
-
-        $this->call(DestinationSeeder::class);
-        $this->call(AttractionSeeder::class);
+       
             }
 }

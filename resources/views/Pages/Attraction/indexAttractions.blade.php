@@ -13,13 +13,17 @@
         </div>
 
         <!-- SEARCH -->
-        <form method="GET">
-            <div class="attraction-search-box">
-                <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
-                <button type="submit">🔍</button>
-            </div>
-        </form>
-
+       <form method="GET">
+    <div class="attraction-search">
+        <span class="search-icon">🔍</span>
+        <input 
+            type="text" 
+            name="search" 
+            placeholder="Search attractions..." 
+            value="{{ request('search') }}"
+        >
+    </div>
+</form>
     </div>
 
     <!-- ADD BUTTON -->

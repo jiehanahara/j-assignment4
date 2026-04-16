@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attraction;
+use App\Models\Destination;
+use Dom\Attr;
 
 class AttractionController extends Controller
 {
@@ -20,33 +22,41 @@ class AttractionController extends Controller
 
     public function create()
     {
-        $attractions = Attraction::all();
-        return view('pages.Attraction.createAttractions', compact('attractions'));
-    }       
+        $destinations = Destination::all();
+         $attractions = Attraction::all();
+        return view('pages.Attraction.createAttractions', compact('destinations', 'attractions'));
+    } 
 
     public function store(Request $request)
     {
+       $request->validate([
+            'destinations_id' => 'required|exists:destinations,id',
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+
         Attraction::create($request->all());
-        return redirect('/attractions')->with('success', 'Attraction created successfully.');
+        return redirect()->route('attractions.index')->with('success', 'Attraction created successfully.');
     }
 
-       public function edit($id)
+    public function edit(Request $request, $id)
     {
+        $destinations= Destination::all();
         $attraction = Attraction::findOrFail($id);
-        if ($attraction) {
-            return view('pages.Attraction.editAttractions', compact('attraction'));
-        }
+        return view('pages.Attraction.editAttractions', compact('attraction'));
     }
 
     public function update(Request $request, $id)
     {
-        $attraction = Attraction::find($id);
-        if ($attraction) {
-            $attraction->update($request->all());
-            return redirect('/attractions')->with('success', 'Attraction updated successfully.');
-        } else {
-            return redirect('/attractions')->with('error', 'Attraction not found.');
-        }
+        $validated = $request->validate([
+            'destinations_id' => 'required|exists:destinations,id',
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+        $attraction = Attraction::findOrFail($id);
+        $attraction->update($validated);
+        return redirect()->route('attractions.index')->with('success', 'Attraction updated successfully.');
+
     }
 
     public function delete($id)
@@ -54,9 +64,9 @@ class AttractionController extends Controller
         $attraction = Attraction::find($id);
         if ($attraction) {
             $attraction->delete();
-            return redirect('/attractions')->with('success', 'Attraction deleted successfully.');
+            return redirect()->route('attractions.index')->with('success', 'Attraction deleted successfully.');
         } else {
-            return redirect('/attractions')->with('error', 'Attraction not found.');
+            return redirect()->route('attractions.index')->with('error', 'Attraction not found.');
         }
     }
 

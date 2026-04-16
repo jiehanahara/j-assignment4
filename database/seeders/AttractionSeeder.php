@@ -32,11 +32,6 @@ class AttractionSeeder extends Seeder
             \App\Models\Attraction::create($attraction);
         }
 
-        for ($i = 1; $i <= 20; $i++) {
-            \App\Models\Attraction::create([
-                'name' => fake()->sentence(3),
-                'description' => fake()->paragraph(),
-            ]);
-        }
+       
     }
 }

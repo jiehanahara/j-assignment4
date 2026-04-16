@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="/destination" class="btn btn-cancel">Back to Destinations</a>
+                    <a href="/destinations" class="btn btn-cancel">Back to Destinations</a>
                 </div>
 
             </div>

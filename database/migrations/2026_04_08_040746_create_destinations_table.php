@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('destinations', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->string('location');
-            $table->string('working_days');
-            $table->string('working_hours');
-            $table->integer('ticket_price');
-            $table->timestamps();
-        });
+       Schema::create('destinations', function (Blueprint $table) {
+    $table->id();
+    $table->string('name');
+    $table->text('description');
+    $table->string('location');
+    $table->string('working_days');
+    $table->string('working_hours');
+    $table->integer('ticket_price');
+    $table->timestamps();
+});
     }
     
 
