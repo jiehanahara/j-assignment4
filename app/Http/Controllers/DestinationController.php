@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -40,8 +41,13 @@ public function store(Request $request)
             'location' => 'required',
             'working_hours' => 'required',
             'working_days' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    Destination::create($request->all());
+    $destination = Destination::create($request->all());
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('destinations', 'public');
+        $destination->update(['image' => $imagePath]);
+    }
 
     return redirect()->route('destination.index')->with('success', 'Destination created successfully.');
 }
@@ -73,10 +79,18 @@ public function edit($id)
             'location' => 'required',
             'working_hours' => 'required',
             'working_days' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $destination = Destination::find($id);
         if ($destination) {
-            $destination->update($request->all());
+            if ($destination->image && $request->hasFile('image')) {
+                Storage::disk('public')->delete($destination->image);
+            }
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('destinations', 'public');
+                $validated['image'] = $imagePath;
+            }
+            $destination->update($validated);
             return redirect()->route('destination.index')->with('success', 'Destination updated successfully.');
         } else {
             return redirect()->route('destination.index')->with('error', 'Destination not found.');

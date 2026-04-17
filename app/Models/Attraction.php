@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Attraction extends Model
 {
     protected $fillable = [
-        'destinations_id',
+        'destination_id',
         'name',
         'description',
     ];

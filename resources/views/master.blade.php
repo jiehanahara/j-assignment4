@@ -647,6 +647,52 @@
 .attraction-search:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
+
+/* REVIEW TABLE STYLE */
+.review-table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.review-table th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #888;
+}
+
+.review-row {
+    background: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.review-row td:first-child {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+.review-row td:last-child {
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.review-row:hover {
+    transform: translateY(-2px);
+}
+
+.review-table td {
+    vertical-align: middle;
+}
+
+table td:last-child,
+table th:last-child {
+    text-align: right;
+}
+
+table td, table th {
+    vertical-align: middle;
+}
     </style>
 
     @stack('styles')

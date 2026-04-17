@@ -21,7 +21,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="/pricing" class="btn , nav-link custom-link">Pricing</a>
+                    <a href="/reviews" class="btn , nav-link custom-link">Reviews</a>
                 </li>
 
                 <li class="nav-item">

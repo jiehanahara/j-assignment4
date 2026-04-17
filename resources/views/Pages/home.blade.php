@@ -11,7 +11,7 @@
 .hero {
     height: 90vh;
     background: linear-gradient(rgba(38, 73, 56, 0.25), rgba(46, 102, 85, 0.25)),
-                url('https://www.dejogja.co.id/wp-content/uploads/2025/03/29-KINTAMANI-BALI-IMG-2.jpg');
+                url('https://wallpapercave.com/wp/RqqIC9C.jpg');
     background-size: cover;
     background-position: center;
 }

@@ -10,7 +10,6 @@
 .destination-header {
     height: 250px;
     background: linear-gradient(rgba(68, 124, 89, 0.3), rgba(83, 65, 16, 0.3)),
-                url('https://wallpaperaccess.com/full/1619886.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -48,6 +47,8 @@
         <div class="destination-header"></div>
 
         <div class="card-body p-4">
+            <a href="{{ route('destination.edit',$destination->id) }}" class="btn btn-edit align-self-start">Edit Destination</a>
+            <img src="{{ asset('storage/images/' . $destination->image) }}" alt="{{ $destination->name }}" class="img-fluid rounded-4 mb-4">
 
             <!-- Title -->
             <h2 class="fw-bold mb-3">{{ $destination->name }}</h2>

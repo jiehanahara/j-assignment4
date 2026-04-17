@@ -26,17 +26,17 @@
                 @method('PUT')
 
                 <div class="form-floating mb-3">
-                    <select class="form-select @error('destinations_id') is-invalid @enderror" name="destinations_id" required>
+                    <select class="form-select @error('destination_id') is-invalid @enderror" name="destination_id" required>
                         <option value="">Select Destination</option>
                         @foreach($destinations as $destination)
-                            <option value="{{ $destination->id }}" {{ $attraction->destinations_id == $destination->id ? 'selected' : '' }}>
+                            <option value="{{ $destination->id }}" {{ $attraction->destination_id == $destination->id ? 'selected' : '' }}>
                                 {{ $destination->name }}
                             </option>
                         @endforeach
                     </select>
-                    <label for="destinations_id" class="form-label">Destination</label>
+                    <label for="destination_id" class="form-label">Destination</label>
                     <div class="invalid-feedback">
-                        @error('destinations_id')
+                        @error('destination_id')
                             {{ $message }}
                         @enderror
                     </div>

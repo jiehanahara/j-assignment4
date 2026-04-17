@@ -27,22 +27,26 @@
 
                 <!-- Destination -->
                 <div class="form-floating mb-3">
-                    <select class="form-select @error('destinations_id') is-invalid @enderror" 
-                            name="destinations_id" required>
-                        <option value="">Select Destination</option>
-                        @foreach($destinations as $destination)
-                            <option value="{{ $destination->id }}" 
-                                {{ old('destinations_id') == $destination->id ? 'selected' : '' }}>
-                                {{ $destination->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <label>Destination</label>
+    <select class="form-select @error('destination_id') is-invalid @enderror" 
+            name="destination_id" required>
 
-                    @error('destinations_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+        <option value="">Select Destination</option>
+
+        @foreach($destinations as $destination)
+            <option value="{{ $destination->id }}" 
+                {{ old('destination_id') == $destination->id ? 'selected' : '' }}>
+                {{ $destination->name }}
+            </option>
+        @endforeach
+
+    </select>
+
+    <label>Destination</label>
+
+    @error('destination_id')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
 
                 <!-- Name -->
                 <div class="form-floating mb-3">

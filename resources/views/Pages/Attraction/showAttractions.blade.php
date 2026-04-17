@@ -9,20 +9,19 @@
         <!-- Title -->
         <h2 class="fw-bold mb-4 text-center">Attraction Details</h2>
 
+        <div class="mb-3">
+            <small class="text-muted">Destination</small>
+            <div class="fw-semibold fs-5">{{ $attraction->destination->name ?? 'No destination' }}</div>
+        </div>
+
         <!-- Info -->
         <div class="mb-3">
             <small class="text-muted">Name</small>
-            <div class="fw-semibold fs-5">{{ $attraction->name }}</div>
+            <div>{{ $attraction->name }}</div>
         </div>
-
         <div class="mb-3">
             <small class="text-muted">Description</small>
             <div>{{ $attraction->description }}</div>
-        </div>
-
-        <div class="mb-3">
-            <small class="text-muted">Destination</small>
-            <div>{{ optional($attraction->destination)->name ?? 'No destination' }}</div>
         </div>
 
         <!-- Buttons -->

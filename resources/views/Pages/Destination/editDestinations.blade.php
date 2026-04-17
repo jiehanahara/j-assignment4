@@ -20,9 +20,20 @@
             ✏️ Edit Destination
         </h3>
 
-        <form action="/destinations/{{ $destination->id }}" method="POST">
+        <form action="/destinations/{{ $destination->id }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
+
+            <div class="form-floating mb-3">
+                <input type="file" class="form-control @error('image') is-invalid @enderror" id="floatinginput" placeholder="image" name="image" value="{{ old('image') }}" accept=".jpg,.jpeg,.png">
+                <label for="floatinginput"> Destination Image</label>
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+
+            </div>
 
             <!-- Name -->
             <div class="form-floating mb-3">

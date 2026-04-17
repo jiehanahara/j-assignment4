@@ -46,14 +46,27 @@
     </div>
     @endif
 
+   
+
 <div class="container mt-5 d-flex justify-content-center">
 
     <div class="card form-card shadow-lg p-4">
 
         <h3 class="fw-bold mb-4 text-center">Add Destination</h3>
 
-        <form action="/destinations" method="POST">
+        <form action="/destinations" method="POST" enctype="multipart/form-data">
         @csrf
+
+         <div class="form-floating mb-3">
+        <input type="file" class="form-control" id="floatinginput" placeholder="image" name="image" value="{{ old('image') }}" accept=".jpg,.jpeg,.png">
+        <label for="floatinginput"> Destination Image</label>
+        @error('image')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+            @enderror
+    </div>
+
 
         <div class="form-floating mb-3">
             <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Asia Heritage" name="name">

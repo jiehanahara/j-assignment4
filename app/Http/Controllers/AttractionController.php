@@ -30,7 +30,7 @@ class AttractionController extends Controller
     public function store(Request $request)
     {
        $request->validate([
-            'destinations_id' => 'required|exists:destinations,id',
+            'destination_id' => 'required',
             'name' => 'required',
             'description' => 'nullable',
         ]);
@@ -43,13 +43,13 @@ class AttractionController extends Controller
     {
         $destinations= Destination::all();
         $attraction = Attraction::findOrFail($id);
-        return view('pages.Attraction.editAttractions', compact('attraction'));
+        return view('pages.Attraction.editAttractions', compact('destinations', 'attraction'));
     }
 
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'destinations_id' => 'required|exists:destinations,id',
+            'destination_id' => 'required',
             'name' => 'required',
             'description' => 'nullable',
         ]);

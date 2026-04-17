@@ -91,3 +91,12 @@ Route::prefix('attractions')->name('attractions.')->group(function () {
     Route::delete('/{id}', [App\Http\Controllers\AttractionController::class, 'delete'])->name('delete');
     Route::get('/showAttraction/{id}', [App\Http\Controllers\AttractionController::class, 'show'])->name('show');
 });
+
+Route::prefix('reviews')->name('reviews.')->group(function () {
+    Route::get('/', [App\Http\Controllers\ReviewController::class, 'index'])->name('index');
+    Route::get('/create', [App\Http\Controllers\ReviewController::class, 'create'])->name('create');
+    Route::post('/', [App\Http\Controllers\ReviewController::class, 'store'])->name('store');
+    Route::get('/{id}/edit', [App\Http\Controllers\ReviewController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [App\Http\Controllers\ReviewController::class, 'update'])->name('update');
+    Route::delete('/{id}', [App\Http\Controllers\ReviewController::class, 'destroy'])->name('destroy');
+});
