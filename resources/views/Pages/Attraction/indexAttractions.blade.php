@@ -5,35 +5,36 @@
 <div class="container mt-4">
 
     <!-- HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
         <div>
-            <h2 class="fw-bold mb-0">Attractions</h2>
+            <h2 class="fw-bold mb-0">🎡 Attractions</h2>
             <small class="text-muted">Manage your attractions</small>
         </div>
 
         <!-- SEARCH -->
-       <form method="GET">
-    <div class="attraction-search">
-        <span class="search-icon">🔍</span>
-        <input 
-            type="text" 
-            name="search" 
-            placeholder="Search attractions..." 
-            value="{{ request('search') }}"
-        >
-    </div>
-</form>
+        <form method="GET">
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    name="search" 
+                    placeholder="Search attractions..." 
+                    value="{{ request('search') }}"
+                >
+                <button type="submit">🔍</button>
+            </div>
+        </form>
+
     </div>
 
     <!-- ADD BUTTON -->
-    <a href="/attractions/create" class="btn attraction-btn-add mb-4">
+    <a href="/attractions/create" class="btn btn-main mb-4">
         + Add Attraction
     </a>
 
     <!-- TABLE -->
-    <div class="table-responsive">
-        <table class="table attraction-table align-middle">
+    <div class="table-responsive custom-table-wrapper">
+        <table class="table custom-table align-middle">
 
             <thead>
                 <tr>
@@ -46,15 +47,17 @@
 
             <tbody>
                 @foreach ($attractions as $attraction)
-                <tr class="attraction-row">
+                <tr class="table-row">
 
-                    <td>#{{ $attraction->id }}</td>
-
-                    <td class="attraction-name">
-                        {{ $attraction->name }}
+                    <td class="id-link">
+                        #{{ $attraction->id }}
                     </td>
 
-                    <td class="attraction-desc">
+                    <td>
+                        <div class="fw-semibold">{{ $attraction->name }}</div>
+                    </td>
+
+                    <td class="text-muted small">
                         {{ Str::limit($attraction->description, 60) }}
                     </td>
 
@@ -62,19 +65,19 @@
                         <div class="d-flex gap-2 justify-content-end flex-wrap">
 
                             <a href="/attractions/{{ $attraction->id }}/edit" 
-                               class="btn attraction-btn-edit btn-sm">
+                               class="btn btn-edit btn-sm">
                                 Edit
                             </a>
 
                             <a href="{{ route('attractions.show', $attraction->id) }}" 
-                               class="btn attraction-btn-view btn-sm">
+                               class="btn btn-main btn-sm">
                                 View
                             </a>
 
                             <form action="/attractions/{{ $attraction->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn attraction-btn-delete btn-sm"
+                                <button class="btn btn-delete btn-sm"
                                     onclick="return confirm('Delete this attraction?')">
                                     Delete
                                 </button>
@@ -91,19 +94,19 @@
     </div>
 
     <!-- PAGINATION -->
-    <div class="mt-4 text-center">
+<div class="mt-4">
 
-        <div class="d-flex justify-content-center">
-            {{ $attractions->links('pagination::bootstrap-5') }}
-        </div>
-
-        <div class="pagination-info mt-2 small text-muted">
-            Showing {{ $attractions->firstItem() }} 
-            to {{ $attractions->lastItem() }} 
-            of {{ $attractions->total() }} attractions
-        </div>
-
+    <div class="d-flex justify-content-center">
+       {{ $attractions->links('pagination::bootstrap-5') }}
     </div>
+
+    <div class="pagination-info text-center mt-2">
+        Showing {{ $attractions->firstItem() }} 
+        to {{ $attractions->lastItem() }} 
+        of {{ $attractions->total() }} attractions
+    </div>
+
+</div>
 
 </div>
 

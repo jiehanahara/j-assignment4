@@ -4,37 +4,39 @@
 
 <div class="container mt-5 d-flex justify-content-center">
 
-    <div class="card shadow-lg border-0 p-4 rounded-4 user-detail-card">
+    <div class="detail-card p-4" style="max-width: 600px; width: 100%;">
 
-        <!-- Title -->
-        <h2 class="fw-bold mb-4 text-center">Attraction Details</h2>
-
-        <div class="mb-3">
-            <small class="text-muted">Destination</small>
-            <div class="fw-semibold fs-5">{{ $attraction->destination->name ?? 'No destination' }}</div>
-        </div>
-
-        <!-- Info -->
-        <div class="mb-3">
-            <small class="text-muted">Name</small>
-            <div>{{ $attraction->name }}</div>
-        </div>
-        <div class="mb-3">
-            <small class="text-muted">Description</small>
-            <div>{{ $attraction->description }}</div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="d-flex justify-content-between">
-
+        <!-- TOP -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
             <a href="/attractions" class="btn btn-cancel">
                 ← Back
             </a>
 
-            <a href="/attractions/{{ $attraction->id }}/edit" class="btn btn-edit">
-                Edit Attraction
+            <a href="/attractions/{{ $attraction->id }}/edit" class="btn btn-main">
+                Edit
             </a>
+        </div>
 
+        <!-- TITLE -->
+        <h2 class="fw-bold mb-3 text-center">
+            🎡 {{ $attraction->name }}
+        </h2>
+
+        <!-- DESTINATION BADGE -->
+        <div class="text-center mb-4">
+            <span class="destination-badge">
+                📍 {{ $attraction->destination->name ?? 'No destination' }}
+            </span>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="description-box mb-4">
+            {{ $attraction->description }}
+        </div>
+
+        <!-- EXTRA INFO (optional future use) -->
+        <div class="info-note text-center small text-muted">
+            Attraction information
         </div>
 
     </div>

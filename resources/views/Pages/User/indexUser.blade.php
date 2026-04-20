@@ -22,29 +22,31 @@ setTimeout(() => {
 <div class="container mt-4">
 
     <!-- HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
         <div>
-            <h2 class="fw-bold mb-0">User Management</h2>
+            <h2 class="fw-bold mb-0">👤 Users</h2>
             <small class="text-muted">Manage your users</small>
         </div>
 
         <!-- SEARCH -->
         <form method="GET">
             <div class="search-box">
-                <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
-                <button>🔍</button>
+                <input type="text" name="search" placeholder="Search users..." value="{{ request('search') }}">
+                <button type="submit">🔍</button>
             </div>
         </form>
 
     </div>
 
     <!-- ADD BUTTON -->
-    <a href="/User/create" class="btn user-btn-create mb-3">+ Add User</a>
+    <a href="/User/create" class="btn btn-main mb-4">
+        + Add User
+    </a>
 
     <!-- TABLE -->
-    <div class="table-responsive">
-        <table class="table user-table align-middle">
+    <div class="table-responsive custom-table-wrapper">
+        <table class="table custom-table align-middle">
 
             <thead>
                 <tr>
@@ -57,9 +59,9 @@ setTimeout(() => {
 
             <tbody>
                 @foreach ($users as $u)
-                <tr class="user-row">
+                <tr class="table-row">
 
-                    <td class="text-muted fw-semibold">#{{ $u->id }}</td>
+                    <td class="id-link">#{{ $u->id }}</td>
 
                     <td>
                         <div class="fw-semibold">{{ $u->name }}</div>
@@ -71,18 +73,20 @@ setTimeout(() => {
                     <td class="text-end">
                         <div class="d-flex justify-content-end gap-2 flex-wrap">
 
-                            <a href="{{ route('User.show', $u->id) }}" class="btn user-btn-view btn-sm">
+                            <a href="{{ route('User.show', $u->id) }}" 
+                               class="btn btn-main btn-sm">
                                 View
                             </a>
 
-                            <a href="{{ route('User.edit', $u->id) }}" class="btn user-btn-edit btn-sm">
+                            <a href="{{ route('User.edit', $u->id) }}" 
+                               class="btn btn-edit btn-sm">
                                 Edit
                             </a>
 
                             <form action="{{ route('User.destroy', $u->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn user-btn-delete btn-sm"
+                                <button class="btn btn-delete btn-sm"
                                     onclick="return confirm('Delete this user?')">
                                     Delete
                                 </button>
@@ -98,20 +102,20 @@ setTimeout(() => {
         </table>
     </div>
 
-    <!-- PAGINATION -->
-    <div class="mt-4 text-center">
+   <!-- PAGINATION -->
+<div class="mt-4">
 
-        <div class="d-flex justify-content-center">
-            {{ $users->links('pagination::bootstrap-5') }}
-        </div>
-
-        <div class="pagination-info mt-2 small text-muted">
-            Showing {{ $users->firstItem() }} 
-            to {{ $users->lastItem() }} 
-            of {{ $users->total() }} users
-        </div>
-
+    <div class="d-flex justify-content-center">
+       {{ $users->links('pagination::bootstrap-5') }}
     </div>
+
+    <div class="pagination-info text-center mt-2">
+        Showing {{ $users->firstItem() }} 
+        to {{ $users->lastItem() }} 
+        of {{ $users->total() }} users
+    </div>
+
+</div>
 
 </div>
 

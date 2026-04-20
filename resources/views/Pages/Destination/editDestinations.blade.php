@@ -2,114 +2,90 @@
 
 @section('content')
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    
 <div class="container mt-5 d-flex justify-content-center">
 
-    <div class="card form-card shadow-lg p-4 border-0">
+    <div class="form-card p-4">
 
-        <h3 class="fw-bold mb-4 text-center text-success">
+        <h3 class="fw-bold mb-4 text-center">
             ✏️ Edit Destination
         </h3>
+
+        {{-- ERROR --}}
+        @if ($errors->any())
+            <div class="custom-alert mb-3">
+                <ul class="mb-0 small">
+                    @foreach ($errors->all() as $error)
+                        <li>⚠️ {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <form action="/destinations/{{ $destination->id }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
-            <div class="form-floating mb-3">
-                <input type="file" class="form-control @error('image') is-invalid @enderror" id="floatinginput" placeholder="image" name="image" value="{{ old('image') }}" accept=".jpg,.jpeg,.png">
-                <label for="floatinginput"> Destination Image</label>
+            <!-- IMAGE -->
+            <div class="mb-3">
+                <label class="form-label">Destination Image</label>
+                <input type="file" class="form-control custom-input @error('image') is-invalid @enderror" name="image">
                 @error('image')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-
             </div>
 
-            <!-- Name -->
+            <!-- NAME -->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control custom-input @error('name') is-invalid @enderror" name="name"
-                       value="{{ $destination->name }}" placeholder="Asia Heritage">
+                <input type="text" class="form-control custom-input @error('name') is-invalid @enderror"
+                       name="name" value="{{ $destination->name }}" placeholder="Name">
                 <label>Destination Name</label>
-                @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
 
-            <!-- Description -->
+            <!-- DESCRIPTION -->
             <div class="form-floating mb-3">
                 <textarea name="description" class="form-control custom-input"
-                          placeholder="Description" style="height: 120px">{{ $destination->description }}</textarea>
+                          style="height: 120px">{{ $destination->description }}</textarea>
                 <label>Description</label>
-             
             </div>
 
-            <!-- Location -->
+            <!-- LOCATION -->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control custom-input @error('location') is-invalid @enderror" name="location"
-                       value="{{ $destination->location }}" placeholder="Pekanbaru">
+                <input type="text" class="form-control custom-input @error('location') is-invalid @enderror"
+                       name="location" value="{{ $destination->location }}" placeholder="Location">
                 <label>Location</label>
-                @error('location')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
 
-            <!-- Price -->
+            <!-- PRICE -->
             <div class="form-floating mb-3">
-                <input type="number" class="form-control custom-input @error('ticket_price') is-invalid @enderror" name="ticket_price"
-                       value="{{ $destination->ticket_price }}" placeholder="100000">
+                <input type="number" class="form-control custom-input @error('ticket_price') is-invalid @enderror"
+                       name="ticket_price" value="{{ $destination->ticket_price }}" placeholder="Price">
                 <label>Ticket Price</label>
-                @error('ticket_price')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
 
-            <!-- Hours -->
+            <!-- HOURS -->
             <div class="form-floating mb-3">
-                <input type="text" class="form-control custom-input @error('working_hours') is-invalid @enderror" name="working_hours"
-                       value="{{ $destination->working_hours }}" placeholder="08.00 - 17.00">
+                <input type="text" class="form-control custom-input"
+                       name="working_hours" value="{{ $destination->working_hours }}">
                 <label>Working Hours</label>
-                @error('working_hours')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
 
-            <!-- Days -->
+            <!-- DAYS -->
             <div class="form-floating mb-4">
-                <input type="text" class="form-control custom-input @error('working_days') is-invalid @enderror" name="working_days"
-                       value="{{ $destination->working_days }}" placeholder="Monday - Sunday">
+                <input type="text" class="form-control custom-input"
+                       name="working_days" value="{{ $destination->working_days }}">
                 <label>Working Days</label>
-                @error('working_days')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
 
-            <!-- Button -->
-             <a href="/destinations" class="btn btn-cancel">
-    Cancel
-</a>
-            <button type="submit" class="btn btn-submit w-50">
-                Update Destination
-            </button>
+            <!-- BUTTONS -->
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="/destinations" class="btn btn-cancel">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn btn-main px-4">
+                    Update →
+                </button>
+            </div>
 
         </form>
 

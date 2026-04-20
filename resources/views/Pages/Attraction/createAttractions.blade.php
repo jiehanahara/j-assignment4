@@ -2,98 +2,81 @@
 
 @section('content')
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul class="mb-0">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+<div class="container mt-5 d-flex justify-content-center">
 
-<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="form-card p-4" style="max-width: 550px; width: 100%;">
 
-    <div class="col-lg-7 col-md-9">
+        <h3 class="fw-bold mb-4 text-center">
+            ➕ Add Attraction
+        </h3>
 
-        <div class="card shadow-lg border-0 p-4 rounded-4 attraction-form-card">
+        {{-- ERROR --}}
+        @if ($errors->any())
+            <div class="custom-alert mb-3">
+                <ul class="mb-0 small">
+                    @foreach ($errors->all() as $error)
+                        <li>⚠️ {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-            <h3 class="fw-bold mb-4 text-center">
-                ➕ Add Attraction
-            </h3>
+        <form action="{{ route('attractions.store') }}" method="POST">
+            @csrf
 
-            <form action="{{ route('attractions.store') }}" method="POST">
-                @csrf
+            <!-- DESTINATION -->
+            <div class="form-floating mb-3">
+                <select class="form-select custom-input @error('destination_id') is-invalid @enderror" 
+                        name="destination_id">
+                    <option value="">Select Destination</option>
 
-                <!-- Destination -->
-                <div class="form-floating mb-3">
-    <select class="form-select @error('destination_id') is-invalid @enderror" 
-            name="destination_id" required>
+                    @foreach($destinations as $destination)
+                        <option value="{{ $destination->id }}" 
+                            {{ old('destination_id') == $destination->id ? 'selected' : '' }}>
+                            {{ $destination->name }}
+                        </option>
+                    @endforeach
+                </select>
 
-        <option value="">Select Destination</option>
+                <label>Destination</label>
+            </div>
 
-        @foreach($destinations as $destination)
-            <option value="{{ $destination->id }}" 
-                {{ old('destination_id') == $destination->id ? 'selected' : '' }}>
-                {{ $destination->name }}
-            </option>
-        @endforeach
+            <!-- NAME -->
+            <div class="form-floating mb-3">
+                <input type="text" 
+                       class="form-control custom-input @error('name') is-invalid @enderror"
+                       name="name"
+                       value="{{ old('name') }}"
+                       placeholder="Name">
 
-    </select>
+                <label>Name</label>
+            </div>
 
-    <label>Destination</label>
+            <!-- DESCRIPTION -->
+            <div class="form-floating mb-4">
+                <textarea 
+                    class="form-control custom-input @error('description') is-invalid @enderror"
+                    name="description"
+                    style="height: 140px"
+                    placeholder="Description">{{ old('description') }}</textarea>
 
-    @error('destination_id')
-        <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
+                <label>Description</label>
+            </div>
 
-                <!-- Name -->
-                <div class="form-floating mb-3">
-                    <input type="text" 
-                           class="form-control @error('name') is-invalid @enderror"
-                           name="name"
-                           value="{{ old('name') }}"
-                           placeholder="Name" required>
+            <!-- BUTTONS -->
+            <div class="d-flex justify-content-between align-items-center">
 
-                    <label>Name</label>
+                <a href="/attractions" class="btn btn-cancel">
+                    ← Cancel
+                </a>
 
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
+                <button type="submit" class="btn btn-main px-4">
+                    Add →
+                </button>
 
-                <!-- Description -->
-                <div class="form-floating mb-3">
-                    <textarea 
-                        class="form-control @error('description') is-invalid @enderror"
-                        name="description"
-                        style="height: 140px"
-                        placeholder="Description">{{ old('description') }}</textarea>
+            </div>
 
-                    <label>Description</label>
-
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- BUTTONS -->
-                <div class="d-flex justify-content-between mt-4">
-
-                    <a href="/attractions" class="btn attraction-btn-cancel">
-                        ← Cancel
-                    </a>
-
-                    <button type="submit" class="btn attraction-btn-submit">
-                        + Add Attraction
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
+        </form>
 
     </div>
 

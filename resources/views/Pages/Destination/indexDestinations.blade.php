@@ -22,17 +22,17 @@
     </script>
 
     <!-- HEADER -->
-    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
 
         <div>
-            <h2 class="fw-bold mb-0">Destinations</h2>
+            <h2 class="fw-bold mb-0">🌿 Destinations</h2>
             <small class="text-muted">Manage and explore places</small>
         </div>
 
         <!-- SEARCH -->
         <form method="GET">
             <div class="search-box">
-                <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
+                <input type="text" name="search" placeholder="Search destination..." value="{{ request('search') }}">
                 <button type="submit">🔍</button>
             </div>
         </form>
@@ -40,10 +40,10 @@
     </div>
 
     <!-- ADD BUTTON -->
-    <a href="/destination/create" class="btn btn-add mb-4">+ Add Destination</a>
+    <a href="/destination/create" class="btn btn-main mb-4">+ Add Destination</a>
 
     <!-- TABLE -->
-    <div class="table-responsive">
+    <div class="table-responsive custom-table-wrapper">
         <table class="table custom-table align-middle">
 
             <thead>
@@ -70,7 +70,7 @@
                         <small class="text-muted">📍 {{ $d->location }}</small>
                     </td>
 
-                    <td class="text-success fw-semibold">
+                    <td class="price-text">
                         Rp {{ number_format($d->ticket_price) }}
                     </td>
 
@@ -101,20 +101,20 @@
         </table>
     </div>
 
-    <!-- PAGINATION -->
-    <div class="mt-4 text-center">
+   <!-- PAGINATION -->
+<div class="mt-4">
 
-        <div class="d-flex justify-content-center">
-            {{ $destinations->links('pagination::bootstrap-5') }}
-        </div>
-
-        <div class="pagination-info mt-2 small text-muted">
-            Showing {{ $destinations->firstItem() }} 
-            to {{ $destinations->lastItem() }} 
-            of {{ $destinations->total() }} results
-        </div>
-
+    <div class="d-flex justify-content-center">
+       {{ $destinations->links('pagination::bootstrap-5') }}
     </div>
+
+    <div class="pagination-info text-center mt-2">
+        Showing {{ $destinations->firstItem() }} 
+        to {{ $destinations->lastItem() }} 
+        of {{ $destinations->total() }} destinations
+    </div>
+
+</div>
 
 </div>
 

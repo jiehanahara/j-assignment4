@@ -4,13 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Destination;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AttractionController;  
+use App\Http\Controllers\AttractionController;
+use Illuminate\Auth\Events\Verified;
 
 Route::get( uri: '/', action: function () {
     return view('welcome');
 });
 
-Route::get( uri: '/Hellooo', action: function () {
+Route::get( uri: '/Hellooo', action: function ()  {
     $name = "Jiehan";
     $hobis = ["reading", "writing", "drawing"];
     return view( view: 'halo', data: compact('name', 'hobis'));
@@ -100,3 +101,9 @@ Route::prefix('reviews')->name('reviews.')->group(function () {
     Route::put('/{id}', [App\Http\Controllers\ReviewController::class, 'update'])->name('update');
     Route::delete('/{id}', [App\Http\Controllers\ReviewController::class, 'destroy'])->name('destroy');
 });
+
+require __DIR__ . '/auth.php';
+
+Route::get('dashboard', function () {
+    return redirect()->route('destination.index');
+})->middleware(['auth'])->name('dashboard');

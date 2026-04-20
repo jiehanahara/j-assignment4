@@ -1,75 +1,76 @@
 @extends('master')
+
 @section('content')
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    
-<form action="/User/{{ $user->id }}" method="POST">
-    @csrf
-    @method('PUT')
 <div class="container mt-5 d-flex justify-content-center">
-    
-    <div class="card form-card shadow-lg p-4 border-0">
 
-        <h3 class="fw-bold mb-4 text-center text-success">
+    <div class="form-card p-4" style="max-width: 500px; width: 100%;">
+
+        <h3 class="fw-bold mb-4 text-center">
             ✏️ Edit User
         </h3>
 
-        <!-- Name -->
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control custom-input @error('name') is-invalid @enderror" name="name"
-                   value="{{ $user->name }}" placeholder="Jiehan Ashara">
-            <label>Name</label>
-            @error('name')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
+        {{-- ERROR --}}
+        @if ($errors->any())
+            <div class="custom-alert mb-3">
+                <ul class="mb-0 small">
+                    @foreach ($errors->all() as $error)
+                        <li>⚠️ {{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <!-- Email -->
-        <div class="form-floating mb-3">
-            <input type="email" class="form-control custom-input @error('email') is-invalid @enderror" name="email"
-                   value="{{ $user->email }}" placeholder="jiehan@example.com">
-            <label>Email</label>
-            @error('email')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
+        <form action="/User/{{ $user->id }}" method="POST">
+            @csrf
+            @method('PUT')
 
-        <!-- Password -->
-        <div class="form-floating mb-3">
-            <input type="password" class="form-control custom-input @error('password') is-invalid @enderror" name="password" placeholder="Password">
-            <label>Password</label>
-            @error('password')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-<div class="d-flex justify-content-between mt-4">
+            <!-- NAME -->
+            <div class="form-floating mb-3">
+                <input type="text" 
+                       class="form-control custom-input @error('name') is-invalid @enderror" 
+                       name="name"
+                       value="{{ $user->name }}" 
+                       placeholder="Name">
+                <label>Name</label>
+            </div>
 
-    <a href="/User" class="btn btn-cancel">
-    Cancel
-</a>
+            <!-- EMAIL -->
+            <div class="form-floating mb-3">
+                <input type="email" 
+                       class="form-control custom-input @error('email') is-invalid @enderror" 
+                       name="email"
+                       value="{{ $user->email }}" 
+                       placeholder="Email">
+                <label>Email</label>
+            </div>
 
-    <button type="submit" class="btn user-btn-edit">
-        Update User
-    </button>
+            <!-- PASSWORD -->
+            <div class="form-floating mb-4">
+                <input type="password" 
+                       class="form-control custom-input @error('password') is-invalid @enderror" 
+                       name="password" 
+                       placeholder="Password">
+                <label>Password</label>
+            </div>
 
-</div>
+            <!-- BUTTONS -->
+            <div class="d-flex justify-content-between align-items-center">
+
+                <a href="/User" class="btn btn-cancel">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn btn-main px-4">
+                    Update →
+                </button>
+
+            </div>
+
+        </form>
+
     </div>
-</div>
 
-</form>
+</div>
 
 @endsection
